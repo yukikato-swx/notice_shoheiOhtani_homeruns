@@ -12,26 +12,55 @@ www.mlb.com から大谷 翔平選手のホームラン数を取得します。
 
 ## 開発環境
 
-### 1. Google Chrome、日本語フォントのインストール
+EC2(Amazon Linux 2)環境を前提とします。
+
+### 1. 初期セットアップ
 
 ```
-$ sudo curl https://intoli.com/install-google-chrome.sh | bash
-$ sudo yum install -y "google-noto*"
+sudo yum -y update
+sudo yum -y install git python-pip
+sudo pip install pipenv
+git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+source ~/.bash_profile
+sudo yum -y install gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel
+pyenv install 3.9.2
+git clone https://github.com/ikayarou/notice_shoheiOhtani_homeruns.git
+cd notice_shoheiOhtani_homeruns
 ```
 
-### 2. Python 実行環境の作成
+### 2. Google Chrome、日本語フォントのインストール
 
 ```
-$ pyenv local 3.9.2
-$ pipenv --python 3.9.2
-$ pipenv shell
-$ pipenv sync --dev
+sudo curl https://intoli.com/install-google-chrome.sh | bash
+sudo yum install -y "google-noto*"
 ```
 
-### 3. ローカルでの実行
+### 3. Python 実行環境の作成
 
 ```
-$ PATH=$PATH:`chromedriver-path` python handler.py
+cd notice_shoheiOhtani_homeruns
+pyenv local 3.9.2
+pipenv --python 3.9.2
+pipenv shell
+pipenv sync --dev
+```
+
+### 4. ローカルでの実行
+
+```
+PATH=$PATH:`chromedriver-path` python handler.py
+```
+
+Returns
+
+```
+2018: 22
+2019: 18
+2020: 7
+2021: 46
 ```
 
 ## 本番環境
@@ -41,17 +70,17 @@ $ PATH=$PATH:`chromedriver-path` python handler.py
 `notice_shoheiOhtani_homeruns` リポジトリ(名称固定)を作成し `master` ブランチに最新のコードを Push します。
 
 ```
-$ git remote add prod ssh://APKxxxxxxxxxxxxxxxxx@git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/notice_shoheiOhtani_homeruns
-$ git push prod master
+git remote add prod ssh://APKxxxxxxxxxxxxxxxxx@git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/notice_shoheiOhtani_homeruns
+git push prod master
 ```
 
 ### 2. ECR への Docker Image の Push
 
 ```
-$ docker build -t notice-ohtani-homeruns .
-$ aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin xxxxxxxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com
-$ docker tag notice-ohtani-homeruns:latest xxxxxxxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-homeruns:latest
-$ docker push xxxxxxxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-homeruns:latest
+docker build -t notice-ohtani-homeruns .
+aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin xxxxxxxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com
+docker tag notice-ohtani-homeruns:latest xxxxxxxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-homeruns:latest
+docker push xxxxxxxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-homeruns:latest
 ```
 
 ### 3. AWS Batch の作成
