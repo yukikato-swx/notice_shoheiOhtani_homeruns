@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 selenium = "*"
-chromedriver-binary = "==89.0.4389.23.0"
+chromedriver-binary = "==96.0.4664.45.0"
 
 [dev-packages]
 flake8 = "*"
