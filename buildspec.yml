@@ -8,13 +8,11 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - amazon-linux-extras install docker -y
       - yum install git -y
       - git clone https://github.com/ikayarou/notice_shoheiOhtani_homeruns.git
   pre_build:
     commands:
       - echo Entered the pre_build phase...
-      - systemctl restart docker
       - cd notice_shoheiOhtani_homeruns
       - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $ECR_PASSWORD_STDIN
   build:
