@@ -10,6 +10,10 @@ phases:
       - echo Entered the install phase...
       - yum install git -y
       - git clone https://github.com/ikayarou/notice_shoheiOhtani_homeruns.git
+      - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - unzip awscliv2.zip
+      - ls -l /root/.pyenv/shims/aws
+      - ./aws/install --bin-dir /root/.pyenv/shims --install-dir /usr/local/aws-cli --update
   pre_build:
     commands:
       - echo Entered the pre_build phase...
@@ -20,5 +24,9 @@ phases:
       - echo Entered the build phase...
       - echo Build started on `date`
       - docker build -t notice-ohtani-homeruns .
+    on-failure: ABORT
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
       - docker tag notice-ohtani-homeruns:latest $AWS_ACCOUNT.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-homeruns:latest
       - docker push $AWS_ACCOUNT.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-homeruns:latest
