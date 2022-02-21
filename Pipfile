@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 selenium = "*"
 chromedriver-binary = "==96.0.4664.45.0"
+slack-sdk = "*"
+pynamodb = "*"
+boto3 = "*"
 
 [dev-packages]
 flake8 = "*"
