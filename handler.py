@@ -74,9 +74,10 @@ def main():
     text = ("速報： :tada:大谷翔平が第 " + current_homerun_counts + " 号ホームランを打ちました！！！:tada:")
 
     # DynamoDBの操作 + slack通知
-    if not MlbHitter.exists():
-        MlbHitter.create_table(read_capacity_units=1, write_capacity_units=1, wait=True)
     season_homeruns = int(current_homerun_counts)
+    if not MlbHitter.exists():
+        # wait=trueでDynamoDBの作成完了まで待機
+        MlbHitter.create_table(read_capacity_units=1, write_capacity_units=1, wait=True)
     diff_homeruns(year, season_homeruns, client, text)
 
 
@@ -97,11 +98,15 @@ def filter_elements(elements, parent_key, parent_value):
 
 
 def diff_homeruns(year, season_homeruns, client, text):
-    for shohei in MlbHitter.query(year):
-        query_result = int(shohei.season_homeruns)
-    if season_homeruns > query_result:
-        update_shohei(year, str(season_homeruns))
-        slack_message(client, text)
+    try:
+        for shohei in MlbHitter.query(year):
+            query_result = int(shohei.season_homeruns)
+        if season_homeruns > query_result:
+            update_shohei(year, str(season_homeruns))
+            slack_message(client, text)
+    except UnboundLocalError: # DynamoDBのItemが未登録の場合に発生
+            update_shohei(year, str(season_homeruns))
+            slack_message(client, text)
 
 
 def update_shohei(year, season_homeruns):
