@@ -7,6 +7,7 @@ www.mlb.com から大谷 翔平選手のホームラン数を取得し、Slack�
 - [Docker](https://www.docker.com)
 - Python 3.9.2
 - Amazon Web Services
+  - Amazon DynamoDB
   - Amazon ECR
   - Amazon EventBridge
   - AWS Batch
@@ -133,7 +134,7 @@ git push
 
 ### 3. CodeCommitへソースコードをPush
 
-`notice_shoheiOhtani_homeruns` リポジトリ(名称固定)を作成し `master` ブランチに最新のコードを Push します。
+`notice_shoheiOhtani_homeruns`リポジトリ(名称固定)を作成し`master`ブランチに最新のコードをPushします。
 
 ```
 git remote add prod ssh://APK123456789012xxxxx@git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/notice_shoheiOhtani_homeruns
@@ -151,10 +152,10 @@ docker push 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-home
 
 ### 5. AWS Batch の作成
 
-`手順4` で ECR に Push した Docke Image を利用する設定内容にて、AWS Batch を作成します。<br>
+`手順4`でECRにPushしたDocke Imageを利用する設定内容にて、AWS Batchを作成します。<br>
 事前に対象パブリックサブネットにて、`パブリック IPv4 アドレスを自動割り当て`を有効化しておきます。
 
-`コンピューティング環境` の設定については、以下にご注意ください。
+`コンピューティング環境`の設定については、以下にご注意ください。
 
 | 項目 | 説明 | サンプル値 |
 | --- | --- | --- |
@@ -162,9 +163,9 @@ docker push 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-home
 | プロビジョニングモデル | 同上 | Fargate |
 | サブネット | パブリックサブネットで安く済ませるため | パブリックサブネット |
 
-`ジョブキュー` は上記のコンピューティング環境を指定します。
+`ジョブキュー`は上記のコンピューティング環境を指定します。
 
-`ジョブ定義` の設定については、以下にご注意ください。
+`ジョブ定義`の設定については、以下にご注意ください。
 
 | 項目 | 説明 | サンプル値 |
 | --- | --- | --- |
