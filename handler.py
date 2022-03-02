@@ -106,7 +106,6 @@ def diff_homeruns(year, season_homeruns, client, text):
             slack_message(client, text)
     except UnboundLocalError: # DynamoDBのItemが未登録の場合に発生
             update_shohei(year, str(season_homeruns))
-            slack_message(client, text)
 
 
 def update_shohei(year, season_homeruns):
