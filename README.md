@@ -172,6 +172,7 @@ docker push 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-home
 | 実行タイムアウト | 実行時間が1分を超えるため | 120 |
 | イメージ | 手順4でPushしたイメージ | 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-homeruns:latest |
 | コマンド | `xxxxxxx`はGitHubユーザー名 | /bin/bash /opt/xxxxxxx/run.sh |
+| vCPU | 最低2以上 | 2.0 |
 | ジョブロール | CodeCommit、SSM、KMSの権限 | 面倒だったので PowerUser 権限を付与しちゃいました |
 | 実行ロール | CodeCommit、SSM、KMSの権限 | 面倒だったので PowerUser 権限を付与しちゃいました |
 | 環境変数の設定 | タイムゾーン | TZ: Asia/Tokyo |
