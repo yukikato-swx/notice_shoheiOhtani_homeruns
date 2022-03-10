@@ -236,7 +236,10 @@ CI/CDの視認性や運用管理を向上させるためにCodePipelineのパイ
 ### 4. CI/CDの確認
 
 GitHubを更新してCI/CDが動作していることを確認します。<br>
-開発環境のEC2上で`handler.py`のコードを一部変更し、開発環境で単体テストを行います。
+まずはDynamoDBテーブルの`season_homeruns`の数値を`0`へ変更します。<br>
+これはホームラン数の差分がないとSlack通知が行われないためです。
+
+続いて開発環境のEC2上で`handler.py`のコードを一部変更し、開発環境で単体テストを行います。
 
 ```
 cd ~/notice_shoheiOhtani_homeruns
@@ -257,7 +260,9 @@ git push
 `git push`に成功したら、AWS CodePipelineのパイプラインが動作し、正常に実行されていることを確認してください。<br>
 ※完了までに少し時間がかかります。
 
-パイプラインまで正常に完了するとECR上のDockerイメージが更新されています。<br>
+パイプラインまで正常に完了するとECR上のDockerイメージが更新されています。
+
+ここでDynamoDBテーブルの`season_homeruns`の数値を`0`へ変更します。<br>
 この状態でAWS Batchのジョブ定義から`新しいジョブを送信`します。<br>
 Slack上に`柿崎翔平`が出現したら単体テストに成功です。
 
