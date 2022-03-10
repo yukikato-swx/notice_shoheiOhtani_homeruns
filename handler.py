@@ -9,7 +9,7 @@ from models.mlb_hitter import MlbHitter
 
 
 ssm = boto3.client('ssm', region_name='ap-northeast-1')
-# 返り値がパラメーター名のアルファベット順にName(list)に格納されるため注意
+# 返り値がパラメーター名のアルファベット順にNames(list)に格納されるため注意
 ssm_response = ssm.get_parameters(
     Names = [
         '/shohei_ohtani_bot/current_season_row',
