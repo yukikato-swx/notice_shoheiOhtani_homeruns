@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 selenium = "*"
-chromedriver-binary = "~=98.0.4758.102"
+chromedriver-binary = "~=100.0.4896.60"
 slack-sdk = "*"
 pynamodb = "*"
 boto3 = "*"
