@@ -1,4 +1,4 @@
-www.mlb.com から大谷 翔平選手のホームラン数を取得し、Slackへ投稿します。
+www.mlb.com/player/shohei-ohtani-660271 から大谷 翔平選手のホームラン数を取得し、Slackへ投稿します。
 
 ![top-page](https://raw.githubusercontent.com/ikayarou/notice_shoheiOhtani_homeruns/images/shohei.jpg)
 
