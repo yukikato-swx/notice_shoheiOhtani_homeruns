@@ -97,6 +97,8 @@ pipenv sync --dev
 PATH=$PATH:`chromedriver-path` python handler.py
 ```
 
+---
+
 ※Chromeのバージョンエラー発生時は以下のコマンドでバージョンを揃えてください。
 
 <> Google Chromeのインストール
@@ -110,6 +112,8 @@ sudo curl https://intoli.com/install-google-chrome.sh | bash
 ```
 pipenv install chromedriver-binary~=98.0.4758.102
 ```
+
+---
 
 ## 本番環境
 
