@@ -45,7 +45,7 @@ www.mlb.com/player/shohei-ohtani-660271 から大谷 翔平選手のホームラ
 | --- | --- | --- | --- | --- |
 | /shohei_ohtani_bot/aws_account | String | text | 123456789012 | AWSアカウントを入力します。 |
 | /shohei_ohtani_bot/current_season_year | String | text | 2021 | ホームラン数を取得する年を入力します。 |
-| /shohei_ohtani_bot/current_season_row | String | text | row-2 | ホームラン数が記録されている行を入力します。 <br> 2021年は「row-2」、2022年は「row-3」。 |
+| /shohei_ohtani_bot/current_season_row | String | text | row-4 | ホームラン数が記録されている行を入力します。 <br> 2021年は「row-3」、2022年は「row-4」。 |
 | /shohei_ohtani_bot/slack_bot_token | SecureString | text | XXXXXXXX | SlackBotのトークンを入力します。 <br> CMKは前手順で作成したものを指定します。 |
 | /shohei_ohtani_bot/slack_channel | String | text | #slack-channel | Slackの投稿先チャンネルを入力します。 |
 
