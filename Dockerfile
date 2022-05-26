@@ -5,6 +5,7 @@ SHELL ["/bin/bash", "-c"]
 RUN yum update -y \
   && curl https://intoli.com/install-google-chrome.sh | bash \
   && yum install -y google-noto* gcc gcc-c++ make git openssl-devel bzip2-devel zlib-devel readline-devel libffi-devel patch tar awscli \
+  && yum clean all \
   && git clone https://github.com/pyenv/pyenv.git /usr/local/pyenv \
   && echo 'export PYENV_ROOT="/usr/local/pyenv"' | tee -a /etc/profile.d/pyenv.sh \
   && echo 'export PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"' | tee -a /etc/profile.d/pyenv.sh \
