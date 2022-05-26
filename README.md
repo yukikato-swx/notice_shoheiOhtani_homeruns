@@ -1,4 +1,4 @@
-www.mlb.com/player/shohei-ohtani-660271 から大谷 翔平選手のホームラン数を取得し、Slackへ投稿します。
+www.mlb.com から大谷 翔平選手のホームラン数を取得し、Slackへ投稿します。
 
 ![top-page](https://raw.githubusercontent.com/ikayarou/notice_shoheiOhtani_homeruns/images/shohei.jpg)
 
@@ -45,7 +45,7 @@ www.mlb.com/player/shohei-ohtani-660271 から大谷 翔平選手のホームラ
 | --- | --- | --- | --- | --- |
 | /shohei_ohtani_bot/aws_account | String | text | 123456789012 | AWSアカウントを入力します。 |
 | /shohei_ohtani_bot/current_season_year | String | text | 2021 | ホームラン数を取得する年を入力します。 |
-| /shohei_ohtani_bot/current_season_row | String | text | row-4 | ホームラン数が記録されている行を入力します。 <br> 2021年は「row-3」、2022年は「row-4」。 |
+| /shohei_ohtani_bot/current_season_row | String | text | row-3 | ホームラン数が記録されている行を入力します。 <br> 2020年は「row-2」、2021年は「row-3」。 |
 | /shohei_ohtani_bot/slack_bot_token | SecureString | text | XXXXXXXX | SlackBotのトークンを入力します。 <br> CMKは前手順で作成したものを指定します。 |
 | /shohei_ohtani_bot/slack_channel | String | text | #slack-channel | Slackの投稿先チャンネルを入力します。 |
 
@@ -97,8 +97,6 @@ pipenv sync --dev
 PATH=$PATH:`chromedriver-path` python handler.py
 ```
 
----
-
 ※Chromeのバージョンエラー発生時は以下のコマンドでバージョンを揃えてください。
 
 <> Google Chromeのインストール
@@ -112,8 +110,6 @@ sudo curl https://intoli.com/install-google-chrome.sh | bash
 ```
 pipenv install chromedriver-binary~=98.0.4758.102
 ```
-
----
 
 ## 本番環境
 
@@ -185,7 +181,7 @@ docker push 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-home
 ### 6. EventBridgeの設定
 
 EventBridge Ruleから`手順5`で作成した`バッチジョブのキュー`を起動するように設定します。<br>
-`0/2 20-6 ? * * *` では、日本時間の5:00-15:00の間で2分毎に起動するように設定しています。
+`0/5 * ? * * *` では、5分毎に起動するように設定しています。
 
 ## CI/CD
 
