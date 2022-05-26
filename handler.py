@@ -3,6 +3,7 @@ import time
 import boto3
 import selenium
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 from slack_sdk import WebClient
 
 from models.mlb_hitter import MlbHitter
@@ -30,7 +31,7 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-gpu')
 options.add_argument('--window-size=1680,1080')
-browser = selenium.webdriver.Chrome(options=options)
+browser = selenium.webdriver.Chrome(ChromeDriverManager().install(), options=options)
 browser.delete_all_cookies()
 
 

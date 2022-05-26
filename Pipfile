@@ -9,6 +9,7 @@ chromedriver-binary = "~=100.0.4896.60"
 slack-sdk = "*"
 pynamodb = "*"
 boto3 = "*"
+webdriver-manager = "*"
 
 [dev-packages]
 flake8 = "*"
