@@ -1,4 +1,4 @@
-FROM amazonlinux
+FROM amazonlinux:latest
 
 SHELL ["/bin/bash", "-c"]
 
@@ -14,4 +14,4 @@ RUN yum update -y \
   && mkdir -p /opt/ikayarou \
   && chmod 777 /opt/ikayarou
 
-ADD run.sh /opt/ikayarou/run.sh
+COPY run.sh /opt/ikayarou/run.sh
