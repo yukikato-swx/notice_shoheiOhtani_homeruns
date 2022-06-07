@@ -181,7 +181,7 @@ docker push 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/notice-ohtani-home
 ### 6. EventBridgeの設定
 
 EventBridge Ruleから`手順5`で作成した`バッチジョブのキュー`を起動するように設定します。<br>
-`0/5 * ? * * *` では、5分毎に起動するように設定しています。
+`0/2 20-6 ? * * *` では、日本時間の5:00-15:00の間で2分毎に起動するように設定しています。
 
 ## CI/CD
 
