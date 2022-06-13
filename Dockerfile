@@ -11,7 +11,7 @@ RUN yum update -y \
   && echo 'export PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"' | tee -a /etc/profile.d/pyenv.sh \
   && echo 'eval "$(pyenv init -)"' | tee -a /etc/profile.d/pyenv.sh \
   && source /etc/profile.d/pyenv.sh && pyenv install 3.9.2 && pyenv global 3.9.2 && pip install --upgrade pip && pip install pipenv \
-  && mkdir -p /opt/ikayarou \
-  && chmod 777 /opt/ikayarou
+  && mkdir -p /opt/yukikato-swx \
+  && chmod 777 /opt/yukikato-swx
 
-COPY run.sh /opt/ikayarou/run.sh
+COPY run.sh /opt/yukikato-swx/run.sh
